@@ -1,11 +1,16 @@
 ##Reading the files
-dir.part1 <- file.path("C:","Users","Henri","SkyDrive","Documents")
-dir.part2 <- file.path("Career","Training", "Coursera")
-dir.part3 <- file.path("Getting and Cleaning Data")
-dir.part4 <- file.path("Week 3","Assignment", "Data","UCI HAR Dataset")
-dir.parts <- file.path(dir.part1,dir.part2,dir.part3,dir.part4)
+
+source ("J:/Documents/Utilities/Data Tools/R/MyFunctions/getDir.R")
+
+machine <- "PNY Silver"
+#machine <- "Browny"
+
+dir.part1 <- getDir("pny silver", "getting and cleaning data")
+dir.part2 <- file.path("Week 3","Assignment", "Data","UCI HAR Dataset")
+dir.parts <- file.path(dir.part1,dir.part2)
 dir.train <- file.path(dir.parts,"train")
 dir.test  <- file.path(dir.parts, "test")
+
 
 Xtrainfile <- file.path(dir.train, "X_train.txt")
 Ytrainfile <- file.path(dir.train, "y_train.txt")
@@ -15,7 +20,7 @@ Subtrainfile <- file.path(dir.train, "subject_train.txt")
 Xtrain <- read.table(Xtrainfile)
 Xtrain$ID <- paste("train", rownames(Xtrain),sep="")
 Ytrain <- read.table(Ytrainfile)
-colnames(Ytrain) <- c("lab")
+colnames(Ytrain) <- c("act")
 subtrain <- read.table(Subtrainfile)
 colnames(subtrain) <- c("subject")
 XYtrain <- cbind(Ytrain, subtrain, Xtrain)
@@ -31,7 +36,7 @@ Subtestfile <- file.path(dir.test, "subject_test.txt")
 Xtest <- read.table(Xtestfile)
 Xtest$ID <- paste("test", rownames(Xtest),sep="")
 Ytest <- read.table(Ytestfile)
-colnames(Ytest) <- c("lab")
+colnames(Ytest) <- c("act")
 subtest <- read.table(Subtestfile)
 colnames(subtest) <- c("subject")
 XYtest <- cbind(Ytest,subtest,Xtest)
@@ -39,3 +44,17 @@ XYtest <- cbind(Ytest,subtest,Xtest)
 
 ## Merge both files
 XYmerged <- rbind(XYtrain,XYtest )
+
+activities <- read.csv(file.path(dir.parts, "activity_labels.txt"), 
+                       header=FALSE,sep=" ")
+
+features <- read.csv(file.path(dir.parts, "features.txt"), 
+                       header=FALSE,sep=" ")
+
+cnt <- dim(activities)[1]
+
+for (x in 1:cnt){
+  XYmerged$activities[XYmerged$act==x] <- as.character(activities[x,2]) 
+}
+
+
