@@ -1,16 +1,10 @@
----
-title: "CodeBook"
-output: html_document
----
-```{r,echo=FALSE}
-{subject "The subject who volonteered for the experiment"
-activities  "the activity being measued"
-rtBodyAcc_mean_X    "mean of mean body acceleration on the x axis"
-tBodyAcc_mean_Y "mean of mean body acceleration on the y axis"
-tBodyAcc_mean_Z "mean of mean body acceleration on the y axis"
-tBodyAcc_std_X  "standard deviation of mean body accel on the x axis"
-tBodyAcc_std_Y  "standard deviation of mean body accel on the y axis"
-tBodyAcc_std_Z  "standard deviation of mean body accel on the z axis"
+Codebook
+tBodyAcc_mean_X
+tBodyAcc_mean_Y
+tBodyAcc_mean_Z
+tBodyAcc_std_X
+tBodyAcc_std_Y
+tBodyAcc_std_Z
 tGravityAcc_mean_X
 tGravityAcc_mean_Y
 tGravityAcc_mean_Z
@@ -91,14 +85,3 @@ angle_tBodyGyroJerkMean_gravityMean_
 angle_X_gravityMean_
 angle_Y_gravityMean_
 angle_Z_gravityMean_
-}
-
-```
-
-
-
-```{r, echo=FALSE}
-
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
